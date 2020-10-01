@@ -5,7 +5,6 @@ import classes from "./DraftDeck.module.css";
 import DraftDeckControls from "./DraftDeckControls/DrafDeckControls";
 import Grid from '@material-ui/core/Grid';
 import RecommendationDeck from "../RecommendationDeck/RecommendationDeck";
-import axios from 'axios'
 
 export default class DraftDeck extends Component {
 
