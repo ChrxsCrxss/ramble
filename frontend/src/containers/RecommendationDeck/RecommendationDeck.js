@@ -6,6 +6,7 @@ import RecommendationModal from "../../components/UI/Modals/RecommendationModal/
 import Spinner from "../../components/UI/Spinner/Spinner";
 import axios from "axios";
 import withErrorHandler from "../../components/hoc/withErrorHandler";
+import { connect } from 'react-redux';
 
 const instance = axios.create();
 
@@ -118,6 +119,12 @@ class RecommendationDeck extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+      userTextInput : state.userTextInput,
+      scrapeList : state.scrapeList
+    }
+  };
 
 
-export default withErrorHandler(RecommendationDeck, instance); 
+export default connect(mapStateToProps)(withErrorHandler(RecommendationDeck, instance)); 

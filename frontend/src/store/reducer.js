@@ -26,11 +26,10 @@ const updateUserInput = ( state, payload ) => {
 const updateScrapeList = ( state, payload ) => {
     return {
         ...state,
-        [state.scrapeList] : {
+        scrapeList : {
             ...state.scrapeList,
-            [payload.name] : ! state.scrapeList.name
+            [payload.name] : ! state.scrapeList[payload.name]
         }
-
     };
 }; 
 
@@ -40,7 +39,7 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.UPDATE_USER_INPUT: return updateUserInput(state, action.payload);
         case actionTypes.UPDATE_SCRAPE_LIST: return updateScrapeList(state, action.payload); 
-        default: throw Error('unknown action type'); 
+        default: return state; 
     }
 }
 

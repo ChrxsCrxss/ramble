@@ -25,11 +25,23 @@ const Checkboxes = (props) => {
     return (
         <FormGroup row>
             <FormControlLabel
-                control={<Checkbox checked={scrapeaTargets.includeIEP} onChange={handleChange} name="includeIEP" />}
+                control={
+                    <Checkbox
+                        checked={props.scrapeList.includeIEP}
+                        onChange={(event) => props.onCheck({ name : event.target.name})}
+                        name="includeIEP"
+                    />
+                }
                 label="Include Results from IEP"
             />
             <FormControlLabel
-                control={<Checkbox checked={scrapeaTargets.includeSEP} onChange={handleChange} name="includeSEP" />}
+                control={
+                    <Checkbox
+                        checked={props.scrapeList.includeSEP}
+                        onChange={(event) => props.onCheck({ name : event.target.name})}
+                        name="includeSEP"
+                    />
+                }
                 label="Include Results from SEP"
             />
         </FormGroup>
@@ -44,5 +56,11 @@ const mapDispatchToProps = dispatch => {
     };
 }
 
-export default connect(null, mapDispatchToProps)(Checkboxes); 
+const mapStateToProps = state => {
+    return {
+        scrapeList: state.scrapeList
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkboxes);
 

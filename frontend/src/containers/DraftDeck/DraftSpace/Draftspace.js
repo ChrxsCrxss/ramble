@@ -27,7 +27,7 @@ class DraftSpace extends Component {
           <form>
             <textarea
               className={classes.DraftContent}
-              onChange={(event) => this.props.updateUserInput({name: event.target.name, value: event.target.value})}
+              onChange={(event) => this.props.onUserInputUpdate({name: event.target.name, value: event.target.value})}
               placeholder="Content: text or paste your argument here!"
               value={this.props.userTextInput.content}
               name='content'
@@ -43,7 +43,7 @@ class DraftSpace extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-      onDynamicAddNode: (payload) => dispatch(actions.updateUserInput(payload))
+      onUserInputUpdate: (payload) => dispatch(actions.updateUserInput(payload))
   };
 }
 
