@@ -40,7 +40,7 @@ class RecommendationDeck extends Component {
         // This will, at the very least, turn off the spinner
         this.setState({ loadingRecommendations: false });
 
-        console.log(response);
+        console.log(response.data);
 
         this.setState({ recommendations: response.data });
 
