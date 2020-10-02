@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { connect } from 'react-redux';
+import * as actions from '../../../store/actions';
 
-export default function Checkboxes(props) {
+const Checkboxes = (props) => {
 
     const [scrapeaTargets, setScrapeTargets] = useState({
         includeIEP: true,
@@ -12,10 +14,10 @@ export default function Checkboxes(props) {
 
     const handleChange = (event) => {
 
-        const name = event.target.name; 
+        const name = event.target.name;
 
         setScrapeTargets(prevState => {
-            return { ...prevState, [name]: ! prevState[name] }
+            return { ...prevState, [name]: !prevState[name] }
         })
 
     };
@@ -35,3 +37,12 @@ export default function Checkboxes(props) {
 
     )
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onCheck: (payload) => dispatch(actions.updateScrapeList(payload))
+    };
+}
+
+export default connect(null, mapDispatchToProps)(Checkboxes); 
+
