@@ -1,4 +1,4 @@
-require('dotenv').config(); 
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -31,34 +31,45 @@ let responseIsEmpty = (res) => !res || res.length === 0;
 const scrapeIEP = async (sentences) => {
 
     const API_KEY = process.env.API_KEY;
-    const SEARCH_ENGINE_ID = process.env.SEARCH_ENGINE_ID; 
-    const GOOGLE_CUSTOMSEARCH_URL = 'https://www.googleapis.com/customsearch/v1'; 
+    const SEARCH_ENGINE_ID = process.env.SEARCH_ENGINE_ID;
+    const GOOGLE_CUSTOMSEARCH_URL = 'https://www.googleapis.com/customsearch/v1';
 
     for (const sentence of sentences) {
         const query = `${GOOGLE_CUSTOMSEARCH_URL}
                         ?key=${API_KEY}
                         &cx=${SEARCH_ENGINE_ID}
-                        &q=${sentence.replace('', '+')}`; 
+                        &q=${sentence.replace('', '+')}`;
 
-        
-        const reponse = await fetch(query); 
 
-        console.log(response); 
+        const reponse = await fetch(query);
+
+        console.log(response);
     }
 
 }
+
+const scrapeSEP = async (sentences) => {
+    // Fill in code here
+};
 
 app.post('/recommendations', async (req, res) => {
 
     // First, grab the user input from the http request body
     console.log(req.body.scrapeList);
     const TextInput = req.body.textInput.content;
-    console.log(`Raw http body:\n${TextInput}`);
+    // console.log(`Raw http body:\n${TextInput}`);
 
     // Next, clean the user input to remove stopwords and punctuation 
     const keywords = KeyWordExtractor.getKeywords(TextInput);
-    console.log(`keywords:\n${[...keywords]}`);
+    // console.log(`keywords:\n${[...keywords]}`);
 
+    const sentences = TextInput.split(/[\\.!?]/)
+        .map( sentence => sentence.replace(/[^a-z0-9+]+/gi, '+')
+        )
+        .map( sentence => sentence[0] === '+' ? sentence.substring(1) : sentence 
+        );
+
+    console.log(sentences)
 
     /**
      * The strategy for crawling the Stanford Encyclopedia of Philosophy (SEP) has
@@ -86,7 +97,7 @@ app.post('/recommendations', async (req, res) => {
     */
 
 
-                                /* PHASE ONE */
+    /* PHASE ONE */
 
     const SEP_SEARCH_ENDPOINT = `https://plato.stanford.edu/search/search?query=`;
     for (let keyword of keywords) {
@@ -120,8 +131,8 @@ app.post('/recommendations', async (req, res) => {
 
     }
 
-                                /* PHASE TWO */
-    
+    /* PHASE TWO */
+
     // Return a sorted list of elements in the set 
     const response = await redis_client.zrevrangeAsync('url_sset', 0, -1);
 
@@ -131,7 +142,7 @@ app.post('/recommendations', async (req, res) => {
 
     const topUrls = response.slice(0, 20);
 
-    const recommendationCardContents = []; 
+    const recommendationCardContents = [];
 
     for (topUrl of topUrls) {
 
