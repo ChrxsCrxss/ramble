@@ -1,0 +1,3 @@
+
+export const UPDATE_USER_INPUT = 'UPDATE_DRAFT';
+export const UPDATE_SCRAPE_LIST = 'UPDATE_SCRAPE_LIST';
