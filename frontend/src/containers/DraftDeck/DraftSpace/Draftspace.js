@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import classes from "./Draftspace.module.css";
+import { connect } from 'react-redux';
+import * as actions from '../../../store/actions';
 
-export default class DraftSpace extends Component {
+class DraftSpace extends Component {
 
   render() {
 
@@ -16,7 +18,7 @@ export default class DraftSpace extends Component {
               placeholder="Title"
               name='title'
               value={this.props.userTextInput.title}
-              onChange={(event) => this.props.changeUserTextInput(event)}
+              onChange={(event) => this.props.updateUserInput({name: event.target.name, value: event.target.value})}
             />
           </form>
 
@@ -25,7 +27,7 @@ export default class DraftSpace extends Component {
           <form>
             <textarea
               className={classes.DraftContent}
-              onChange={(event) => this.props.changeUserTextInput(event)}
+              onChange={(event) => this.props.updateUserInput({name: event.target.name, value: event.target.value})}
               placeholder="Content: text or paste your argument here!"
               value={this.props.userTextInput.content}
               name='content'
@@ -39,3 +41,16 @@ export default class DraftSpace extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+      onDynamicAddNode: (payload) => dispatch(actions.updateUserInput(payload))
+  };
+}
+
+const mapStateToProps = state => {
+  return {
+    userTextInput : state.userTextInput
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DraftSpace); 

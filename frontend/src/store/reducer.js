@@ -31,8 +31,8 @@ const updateScrapeList = ( state, payload ) => {
             [payload.name] : ! state.scrapeList.name
         }
 
-    }
-}
+    };
+}; 
 
 
 const reducer = (state = initialState, action) => {
@@ -40,6 +40,7 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.UPDATE_USER_INPUT: return updateUserInput(state, action.payload);
         case actionTypes.UPDATE_SCRAPE_LIST: return updateScrapeList(state, action.payload); 
+        default: throw Error('unknown action type'); 
     }
 }
 
