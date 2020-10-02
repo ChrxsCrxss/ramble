@@ -17,7 +17,7 @@ const updateUserInput = ( state, payload ) => {
     return {
         ...state, 
         userTextInput : {
-            ...state,
+            ...state.userTextInput,
             [payload.name] : payload.value
         }
     };

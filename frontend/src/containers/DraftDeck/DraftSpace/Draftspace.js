@@ -18,7 +18,7 @@ class DraftSpace extends Component {
               placeholder="Title"
               name='title'
               value={this.props.userTextInput.title}
-              onChange={(event) => this.props.updateUserInput({name: event.target.name, value: event.target.value})}
+              onChange={(event) => this.props.onUserInputUpdate({name: event.target.name, value: event.target.value})}
             />
           </form>
 

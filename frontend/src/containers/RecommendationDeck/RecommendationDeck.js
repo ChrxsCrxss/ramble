@@ -32,6 +32,7 @@ class RecommendationDeck extends Component {
 
         // Make an async request to the backend using this method 
         const response = await instance.post(`http://localhost:4000/recommendations`, {
+            scrapeList: this.props.scrapeList,
             textInput: this.props.userTextInput
         });
 

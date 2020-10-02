@@ -28,7 +28,7 @@ app.use(cors());
 
 let responseIsEmpty = (res) => !res || res.length === 0;
 
-const scrapeIEP = (sentences) => {
+const scrapeIEP = async (sentences) => {
 
     const API_KEY = process.env.API_KEY;
     const SEARCH_ENGINE_ID = process.env.SEARCH_ENGINE_ID; 
@@ -51,7 +51,8 @@ const scrapeIEP = (sentences) => {
 app.post('/recommendations', async (req, res) => {
 
     // First, grab the user input from the http request body
-    const TextInput = req.body.textInput;
+    console.log(req.body.scrapeList);
+    const TextInput = req.body.textInput.content;
     console.log(`Raw http body:\n${TextInput}`);
 
     // Next, clean the user input to remove stopwords and punctuation 
