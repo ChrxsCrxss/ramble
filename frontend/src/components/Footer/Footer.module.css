@@ -1,5 +1,10 @@
 
 .Footer {
-    margin: auto; 
     bottom: 0;
+    width: 100%;
+    background-color: greenyellow;
+}
+
+.Footer p {
+    margin-bottom: 0;
 }
