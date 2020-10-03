@@ -5,41 +5,14 @@ import classes from "./DraftDeck.module.css";
 import DraftDeckControls from "./DraftDeckControls/DrafDeckControls";
 import Grid from '@material-ui/core/Grid';
 import RecommendationDeck from "../RecommendationDeck/RecommendationDeck";
+import { connect } from 'react-redux';
 
-export default class DraftDeck extends Component {
+class DraftDeck extends Component {
 
 
     state = {
         showRecommendations: false,
-        userTextInput: {
-            title : '',
-            content : ''
-        }
     };
-
-    changeUserTextInput = (event) => {
-
-        const name = event.target.name; 
-        const value = event.target.value; 
-
-        console.log(name, value);
-        
-        /**
-         * This is always a bit of a pain in the ass to remember. A few things. First,
-         * this is an asynchronous call to setState, which means we have to save the fields
-         * in the event object because React pools and recycles events. Futher, we have to 
-         * spread out the objects 
-         */
-        this.setState(prevState => {
-            return {
-                ...prevState,
-                userTextInput : {
-                    ...prevState.userTextInput,
-                    [name] : value
-                }
-            }
-        });
-    }
 
     toggleTalkModeHandler = () => {
         alert("Switched to talk mode");
@@ -81,17 +54,18 @@ export default class DraftDeck extends Component {
                 >
 
                     <Grid item sm={gridSize}>
-                        <DraftSpace
-                        userTextInput={this.state.userTextInput}
-                        changeUserTextInput={this.changeUserTextInput}
-                        />
+                        <DraftSpace/>
                     </Grid>
 
                     {this.state.showRecommendations ?
                         <Grid item sm={gridSize} className={classes.RecommendationDeck}>
-                            <RecommendationDeck 
-                                userTextInput={` ${this.state.userTextInput.title} ${this.state.userTextInput.content}` }
-                            />
+
+                            <Card>
+                                <p>
+                                    Showing Recommendations for: <strong><em>{this.props.userTextInput.title}</em></strong>
+                                </p>
+                            </Card>
+                            <RecommendationDeck />
                         </Grid>
                         : null
                     }
@@ -104,3 +78,11 @@ export default class DraftDeck extends Component {
 
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        userTextInput : state.userTextInput
+    }
+}
+
+export default connect(mapStateToProps)(DraftDeck); 

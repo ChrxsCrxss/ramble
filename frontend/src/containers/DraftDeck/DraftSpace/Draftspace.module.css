@@ -5,20 +5,25 @@
     flex-wrap: wrap; */
     /* width: 60%;
     height: 60%; */
-    padding: 10px;
     overflow: scroll; 
+
   }
 
   .Title {
+    font-size: xx-large;
     outline: none; 
     border: none; 
     resize: none;
+    width: -webkit-fill-available;
   }
 
   .Body {
-    width: -webkit-fill-available;
+    font-family: sans-serif;
+    font-size: x-large;
     height: -webkit-fill-available;
+    width: -webkit-fill-available;
     outline: none; 
     border: none; 
     resize: none;
+    padding: 0 16px;
 }
