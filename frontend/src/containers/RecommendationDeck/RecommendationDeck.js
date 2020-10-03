@@ -40,9 +40,12 @@ class RecommendationDeck extends Component {
         // This will, at the very least, turn off the spinner
         this.setState({ loadingRecommendations: false });
 
-        console.log(response.data);
+        if (response) {
 
-        this.setState({ recommendations: response.data });
+            console.log(response.data);
+
+            this.setState({ recommendations: response.data });
+        }
 
     };
 
@@ -94,7 +97,7 @@ class RecommendationDeck extends Component {
                         }
                         <div className={classes.RecommendationDeck}>
                             {
-                                this.state.recommendations.map( (recommendation, idx) => {
+                                this.state.recommendations.map((recommendation, idx) => {
 
                                     return (
                                         <RecommendationCard
@@ -122,10 +125,10 @@ class RecommendationDeck extends Component {
 
 const mapStateToProps = state => {
     return {
-      userTextInput : state.userTextInput,
-      scrapeList : state.scrapeList
+        userTextInput: state.userTextInput,
+        scrapeList: state.scrapeList
     }
-  };
+};
 
 
 export default connect(mapStateToProps)(withErrorHandler(RecommendationDeck, instance)); 

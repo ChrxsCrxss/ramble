@@ -15,6 +15,7 @@ class DraftSpace extends Component {
 
           <form>
             <textarea
+            class={classes.Title}
               placeholder="Title"
               name='title'
               value={this.props.userTextInput.title}
@@ -26,7 +27,7 @@ class DraftSpace extends Component {
 
           <form>
             <textarea
-              className={classes.DraftContent}
+              className={classes.Body}
               onChange={(event) => this.props.onUserInputUpdate({name: event.target.name, value: event.target.value})}
               placeholder="Content: text or paste your argument here!"
               value={this.props.userTextInput.content}

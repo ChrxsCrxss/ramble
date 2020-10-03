@@ -9,11 +9,16 @@
     overflow: scroll; 
   }
 
+  .Title {
+    outline: none; 
+    border: none; 
+    resize: none;
+  }
 
-  .DraftContent {
+  .Body {
     width: -webkit-fill-available;
     height: -webkit-fill-available;
     outline: none; 
-    /* border: none;  */
+    border: none; 
     resize: none;
 }
