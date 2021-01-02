@@ -6,6 +6,7 @@ import DraftDeckControls from "./DraftDeckControls/DrafDeckControls";
 import Grid from '@material-ui/core/Grid';
 import RecommendationDeck from "../RecommendationDeck/RecommendationDeck";
 import { connect } from 'react-redux';
+import Checkboxes from '../../components/UI/Checkboxes/Checkboxes';
 
 class DraftDeck extends Component {
 
@@ -55,6 +56,7 @@ class DraftDeck extends Component {
 
                     <Grid item sm={gridSize}>
                         <DraftSpace/>
+                        <Checkboxes/>
                     </Grid>
 
                     {this.state.showRecommendations ?

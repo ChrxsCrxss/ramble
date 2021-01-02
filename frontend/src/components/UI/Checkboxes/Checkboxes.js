@@ -4,6 +4,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
+import classes from './Checkboxes.module.css'
 
 const Checkboxes = (props) => {
 
@@ -23,28 +24,31 @@ const Checkboxes = (props) => {
     };
 
     return (
-        <FormGroup row>
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={props.scrapeList.includeIEP}
-                        onChange={(event) => props.onCheck({ name : event.target.name})}
-                        name="includeIEP"
-                    />
-                }
-                label="Include Results from IEP"
-            />
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={props.scrapeList.includeSEP}
-                        onChange={(event) => props.onCheck({ name : event.target.name})}
-                        name="includeSEP"
-                    />
-                }
-                label="Include Results from SEP"
-            />
-        </FormGroup>
+        <React.Fragment>
+        <hr/>
+            <FormGroup row className={classes.CheckBoxContainer}>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={props.scrapeList.includeIEP}
+                            onChange={(event) => props.onCheck({ name: event.target.name })}
+                            name="includeIEP"
+                        />
+                    }
+                    label="Include Results from IEP"
+                />
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={props.scrapeList.includeSEP}
+                            onChange={(event) => props.onCheck({ name: event.target.name })}
+                            name="includeSEP"
+                        />
+                    }
+                    label="Include Results from SEP"
+                />
+            </FormGroup>
+        </React.Fragment>
 
 
     )

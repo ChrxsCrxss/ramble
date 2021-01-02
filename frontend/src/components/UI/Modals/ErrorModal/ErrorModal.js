@@ -13,6 +13,7 @@ const modal = (props) => (
                 transform: props.show ? 'translate(0)' : 'translate(100vh)',
                 opacity: props.show ? '1' : '0'
             }}>
+            <p>Apologies. We appear to be experiencing tecnhical difficulties:</p>
             {props.children}
         </div>
 
