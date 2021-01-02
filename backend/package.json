@@ -22,11 +22,15 @@
   "devDependencies": {
     "@types/bluebird": "^3.5.33",
     "@types/cheerio": "^0.22.23",
-    "@types/node": "^14.14.19"
+    "@types/cors": "^2.8.9",
+    "@types/node": "^14.14.19",
+    "@types/node-fetch": "^2.5.7",
+    "@types/redis": "^2.8.28"
   },
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --project ./"
   },
   "keywords": [],
   "author": "",

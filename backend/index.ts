@@ -3,9 +3,6 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import fetch from "node-fetch";
-import cheerio from "cheerio";
-
-import scrapeSEP from "./src/services/SEPScraper";
 
 /**
  * In order to use async/wait syntax, we promisify
@@ -13,22 +10,16 @@ import scrapeSEP from "./src/services/SEPScraper";
  */
 import bluebird from "bluebird";
 import redis from "redis";
-
-bluebird.promisifyAll(redis.RedisClient.prototype);
-bluebird.promisifyAll(redis.Multi.prototype);
-
-//configure redis client on port 6379
-const port_redis = process.env.PORT || 6379;
-const redis_client = redis.createClient(port_redis);
+import StanfordEncyScraper from "./src/services/SEPScraper";
+import recommendationCard from "./src/models/recommendationCard";
+import InternetEncyPhilScraper from "./src/services/IEPScraper";
 
 // configure express instance
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-let responseIsEmpty = (res) => !res || res.length === 0;
-
-const scrapeIEP = async (sentences) => {
+const scrapeIEP = async (sentences: string[]) => {
   const API_KEY = process.env.API_KEY;
   const SEARCH_ENGINE_ID = process.env.SEARCH_ENGINE_ID;
   const GOOGLE_CUSTOMSEARCH_URL = `https://www.googleapis.com/customsearch/v1`;
@@ -49,25 +40,35 @@ app.post("/recommendations", async (req, res) => {
 
   // First, grab the user input from the http request body
   const TextInput = req.body.textInput.content;
-  const sentences = TextInput.split(/[\\.!?]/)
-    .map((sentence) => sentence.replace(/[^a-z0-9+]+/gi, "+"))
-    .map((sentence) => (sentence[0] === "+" ? sentence.substring(1) : sentence))
-    .filter((sentence) => sentence.length > 1);
+  const sentences: string[] = TextInput.split(/[\\.!?]/)
+    .map((sentence: string) => sentence.replace(/[^a-z0-9+]+/gi, "+"))
+    .map((sentence: string) =>
+      sentence[0] === "+" ? sentence.substring(1) : sentence
+    )
+    .filter((sentence: string) => sentence.length > 1);
 
-  const recommendations = [];
+  const recommendations: recommendationCard[] = [];
 
-  if (req.body.scrapeList.includeSEP) {
+  //   if (req.body.scrapeList.includeSEP) {
+  //     try {
+  //       const stanfordEncyScraper = new StanfordEncyScraper();
+  //       const stanfordRecommendations: recommendationCard[] = await stanfordEncyScraper.scrape(
+  //         sentences
+  //       );
+  //       recommendations.push(...stanfordRecommendations);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+
+  if (req.body.scrapeList.includeIEP) {
+    const internetEncyPhilScraper = new InternetEncyPhilScraper();
     try {
-      const stanfordRecommendation = await scrapeSEP(sentences, redis_client);
-      recommendations.push(...stanfordRecommendation);
-    } catch (error) {
-      console.log(error);
+      internetEncyPhilScraper.scrape(sentences);
+    } catch (err) {
+      console.log(err);
     }
   }
-
-  // if (req.body.scrapeList.includeIEP) {
-  //     scrapeIEP(sentences);
-  // }
 
   res.send(recommendations);
 });

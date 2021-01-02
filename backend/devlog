@@ -13,3 +13,9 @@ UPDATE: can scrape IEP and SEP
 
 https://en.wikipedia.org/w/api.php
 
+
+1/1/2021: 
+Back at it again. I want to try implementing a new architecture on the backend. I want to apply the
+strategy design pattern and the front-controller design pattern. I also want to switch it up: the
+n-layer architecture is getting old and the meta is clear: keep abstracting until the entire backend
+is boilderplate  
