@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import cheerio from "cheerio";
 import recommendationCard from "../models/recommendationCard";
 import { cacheService } from "../interfaces";
-import RedisDAO from "./RedisDAO";
+import RedisDAO from "../data/RedisDAO";
 
 /**
  * The strategy for crawling the Stanford Encyclopedia of Philosophy (SEP) has

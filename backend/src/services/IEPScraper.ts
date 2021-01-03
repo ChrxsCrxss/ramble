@@ -1,5 +1,5 @@
 import recommendationCard from "../models/recommendationCard";
-import RedisDAO from "./RedisDAO";
+import RedisDAO from "../data/RedisDAO";
 import fetch from "node-fetch";
 import cheerio from "cheerio";
 import { cacheService } from "../interfaces";
@@ -62,22 +62,3 @@ export default class InternetEncyPhilScraper {
     return recommendationCardContents;
   };
 }
-
-// export async function scrapeIEP(sentences: string[]) {
-//   const API_KEY = process.env.API_KEY;
-//   const SEARCH_ENGINE_ID = process.env.SEARCH_ENGINE_ID;
-//   const GOOGLE_CUSTOMSEARCH_URL = `https://www.googleapis.com/customsearch/v1`;
-
-//   for (const sentence of sentences) {
-//     const query = `${GOOGLE_CUSTOMSEARCH_URL}?key=${API_KEY}&cx=${SEARCH_ENGINE_ID}&q=${sentence}`;
-
-//     const response = await fetch(query);
-
-//     const results = await response.json();
-
-//     for (const items of results.items) {
-//     }
-
-//     console.log(results.items);
-//   }
-// }

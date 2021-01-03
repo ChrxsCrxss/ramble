@@ -13,27 +13,12 @@ import redis from "redis";
 import StanfordEncyScraper from "./src/services/SEPScraper";
 import recommendationCard from "./src/models/recommendationCard";
 import InternetEncyPhilScraper from "./src/services/IEPScraper";
+import WikiScraper from "./src/services/WikiScraper";
 
 // configure express instance
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-
-const scrapeIEP = async (sentences: string[]) => {
-  const API_KEY = process.env.API_KEY;
-  const SEARCH_ENGINE_ID = process.env.SEARCH_ENGINE_ID;
-  const GOOGLE_CUSTOMSEARCH_URL = `https://www.googleapis.com/customsearch/v1`;
-
-  for (const sentence of sentences) {
-    const query = `${GOOGLE_CUSTOMSEARCH_URL}?key=${API_KEY}&cx=${SEARCH_ENGINE_ID}&q=${sentence}`;
-
-    const response = await fetch(query, {});
-
-    const results = await response.json();
-
-    console.log(results.items);
-  }
-};
 
 app.post("/recommendations", async (req, res) => {
   console.log(req.body.scrapeList);
@@ -49,6 +34,9 @@ app.post("/recommendations", async (req, res) => {
 
   const recommendations: recommendationCard[] = [];
 
+  const wikiScraper = new WikiScraper();
+  wikiScraper.scracpe(sentences);
+
   //   if (req.body.scrapeList.includeSEP) {
   //     try {
   //       const stanfordEncyScraper = new StanfordEncyScraper();
@@ -61,14 +49,14 @@ app.post("/recommendations", async (req, res) => {
   //     }
   //   }
 
-  if (req.body.scrapeList.includeIEP) {
-    const internetEncyPhilScraper = new InternetEncyPhilScraper();
-    try {
-      internetEncyPhilScraper.scrape(sentences);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  // if (req.body.scrapeList.includeIEP) {
+  //   const internetEncyPhilScraper = new InternetEncyPhilScraper();
+  //   try {
+  //     internetEncyPhilScraper.scrape(sentences);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
   res.send(recommendations);
 });
