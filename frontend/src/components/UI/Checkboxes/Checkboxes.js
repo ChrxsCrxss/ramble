@@ -11,6 +11,7 @@ const Checkboxes = (props) => {
     const [scrapeaTargets, setScrapeTargets] = useState({
         includeIEP: true,
         includeSEP: true,
+        includeWiki: true
     });
 
     const handleChange = (event) => {
@@ -25,7 +26,7 @@ const Checkboxes = (props) => {
 
     return (
         <React.Fragment>
-        <hr/>
+            <hr />
             <FormGroup row className={classes.CheckBoxContainer}>
                 <FormControlLabel
                     control={
@@ -46,6 +47,16 @@ const Checkboxes = (props) => {
                         />
                     }
                     label="Include Results from SEP"
+                />
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={props.scrapeList.includeWiki}
+                            onChange={(event) => props.onCheck({ name: event.target.name })}
+                            name="includeWiki"
+                        />
+                    }
+                    label="Include Results from Wikipedia"
                 />
             </FormGroup>
         </React.Fragment>

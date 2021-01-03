@@ -13,9 +13,6 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 const draftDeckControls = (props) => {
 
-    const gotoMindMap = () => {
-        props.history.push('/thoughtTree'); 
-    }
 
     return (
 

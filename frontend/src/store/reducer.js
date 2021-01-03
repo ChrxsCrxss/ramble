@@ -9,6 +9,7 @@ const initialState = {
     scrapeList: {
         includeIEP: true,
         includeSEP: true,
+        includeWiki: true
     },
     recommendatinos: []
 };
