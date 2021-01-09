@@ -24,23 +24,22 @@ To-do list:
 * Wow improvement to be done 2
 
 ## Getting Started
-   
-(include git clone command)
-(include all environment setup steps)
 
-> Be sure to include BOTH Windows and Unix command  
-> Be sure to mention if the commands only work on a specific platform (eg. AWS, GCP)
-
-- All the `code` required to get started
-- Images of what it should look like
+To get started, simply clone the project. 
+In both the frontend and backend folders, run `npm install`. 
+To spin up the client, run `npm start`. 
+To spin un the backend, run `nodemon index.js`.
 
 ## Usage
 
-> Here, you instruct other people on how to use your project after they’ve installed it. This would also be a good place to include screenshots of your project in action.
+The application is straightforward. Just type your ideas into the draft space.
+When you are satisfied, hit  `Get Recommendations` and the application with take
+care of the rest. After a short delay (note, however, that longer drafts => longer delay), 
+you will recieve a set of recommended readings, each complete with a title, link, and 
+introductory blurb!
 
 ## Contributors
 
-> Here list the people who have contributed to this project. (ignore this section, if its a solo project)
 
 ## License
 
