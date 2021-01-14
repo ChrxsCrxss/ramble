@@ -1,6 +1,0 @@
-https://medium.com/@rifaislamet1509/solved-scraping-all-of-data-from-google-cse-using-python-13d3e6f12413
-
-At Present, we can scrape SEP directly and IEP using google search api. Howevever, we are limited to 100
-transactions per day with google api, meaning we will probably have to do sentence-level searches instead
-of keyword searches. Of course, one benefit is that we will reduce the number of requests and reduce 
-response time. We may also limit irrelevant results based on unimportant non-stopwords. 
