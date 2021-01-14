@@ -9,8 +9,8 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                sh "sudo rm -rf /var/www/ramble-client"
-                sh "sudo cp -r ${WORKSPACE}/build/ /var/www/ramble-client/"
+                sh "sudo rm -rf -S /var/www/ramble-client"
+                sh "sudo cp -r -S ${WORKSPACE}/build/ /var/www/ramble-client/"
             }
         }
     }
